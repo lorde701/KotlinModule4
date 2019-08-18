@@ -14,7 +14,7 @@ fun main(args: Array<String>) {
 class Boeing747(maximumRange: Double, tankCapacity: Double, override val passengerCapacity: Int)
     : Aircraft(maximumRange, tankCapacity), Passenger
 
-abstract class Aircraft(var maximumRange: Double, var tankCapacity: Double) {
+abstract class Aircraft(val maximumRange: Double, val tankCapacity: Double) {
     val fuelConsumption
         get() = tankCapacity / maximumRange * 100
 }

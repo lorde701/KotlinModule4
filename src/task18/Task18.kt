@@ -1,5 +1,6 @@
 //Задание 18: Конструктор
-//Усовершенствуйте программу для авиакомпании. Пусть свойства: максимальная дальность полета и вместимость бака определяются через конструктор.
+//Усовершенствуйте программу для авиакомпании.
+//Пусть свойства: максимальная дальность полета и вместимость бака определяются через конструктор.
 package task18
 
 fun main(args: Array<String>) {
@@ -7,7 +8,7 @@ fun main(args: Array<String>) {
     println("Расход топлива - ${aircraft.fuelConsumption} л/100км")
 }
 
-class Aircraft(var maximumRange: Double, var tankCapacity: Double) {
+class Aircraft(val maximumRange: Double, val tankCapacity: Double) {
     val fuelConsumption
         get() = tankCapacity / maximumRange * 100
 }

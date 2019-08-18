@@ -10,28 +10,38 @@ fun main(args: Array<String>) {
     val boeing = Boeing747(14205.0, 214140.0, 624)
     val mig = Mig29(2000.0, 5830.0)
     val an = An24(1850.0, 4850.0, 6500.0)
+    val aircrafts = listOf<Aircraft>(mig, an, boeing)
 
-    println("boeing:")
-    boeing.printInfo()
-    println("\nmig:")
-    mig.printInfo()
-    println("\nan:")
-    an.printInfo()
-
+    while (true) {
+        println("\nСписок самолетов:")
+        aircrafts.withIndex().forEach { (index, aircraft) -> println("${index + 1}. ${aircraft.name}") }
+        println("Выберите номер самолета. Для выхода введите 0.")
+        val choice = try {
+            readLine().toString().toInt()
+        } catch (e: NumberFormatException) {
+            println("Введите число")
+            continue
+        }
+        when (choice) {
+            0 -> return
+            in 1..aircrafts.size  -> aircrafts[choice - 1].printInfo()
+            else -> println("Введите число из диапазона 0 - ${aircrafts.size}")
+        }
+    }
 }
 
 class Boeing747(maximumRange: Double, tankCapacity: Double, override val passengerCapacity: Int)
-    : Aircraft(maximumRange, tankCapacity), Passenger {
+    : Aircraft("Боинг-747", maximumRange, tankCapacity), Passenger {
     override fun printInfo() {
         super.printInfo()
         println("Вместимость пассажиров - $passengerCapacity")
     }
 }
 
-class Mig29(maximumRange: Double, tankCapacity: Double) : Aircraft(maximumRange, tankCapacity)
+class Mig29(maximumRange: Double, tankCapacity: Double) : Aircraft("МИГ-29", maximumRange, tankCapacity)
 
 class An24(maximumRange: Double, tankCapacity: Double, override val carryingCapacity: Double)
-    : Aircraft(maximumRange, tankCapacity), Cargo {
+    : Aircraft("АН-24", maximumRange, tankCapacity), Cargo {
     override fun printInfo() {
         super.printInfo()
         println("Грузоподъемность - $carryingCapacity")
@@ -39,13 +49,16 @@ class An24(maximumRange: Double, tankCapacity: Double, override val carryingCapa
 }
 
 
-abstract class Aircraft(var maximumRange: Double, var tankCapacity: Double) {
+abstract class Aircraft(val name: String, val maximumRange: Double, val tankCapacity: Double) {
     protected val fuelConsumption
         get() = tankCapacity / maximumRange * 100
 
-    open fun printInfo() = println("""Максимальная дальность полета - $maximumRange
+    open fun printInfo() {
+        println("""Модель самолета - $name
+        |Максимальная дальность полета - $maximumRange
         |Вместимость бака - $tankCapacity"""
-            .trimMargin())
+                .trimMargin())
+    }
 }
 
 interface Passenger {

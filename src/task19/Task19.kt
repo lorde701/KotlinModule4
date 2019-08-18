@@ -10,10 +10,10 @@ fun main(args: Array<String>) {
     println("Расход топлива boeing2 - ${boeing2.fuelConsumption}, вместимость пассажиров boeing2 - ${boeing2.passengerCapacity}")
 }
 
-class Boeing747(maximumRange: Double, tankCapacity: Double, var passengerCapacity: Int) : Aircraft(maximumRange, tankCapacity)
+class Boeing747(maximumRange: Double, tankCapacity: Double, val passengerCapacity: Int) : Aircraft(maximumRange, tankCapacity)
 
 
-open class Aircraft(var maximumRange: Double, var tankCapacity: Double) {
+open class Aircraft(val maximumRange: Double, val tankCapacity: Double) {
     val fuelConsumption
         get() = tankCapacity / maximumRange * 100
 }

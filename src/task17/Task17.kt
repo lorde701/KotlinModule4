@@ -5,7 +5,7 @@
 package task17
 
 fun main(args: Array<String>) {
-    var aircraft = Aircraft()
+    val aircraft = Aircraft()
     aircraft.maximumRange = 201.2 //в км
     aircraft.tankCapacity = 100.5 //в л
     println("Расход топлива - ${aircraft.fuelConsumption} л/100км")

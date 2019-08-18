@@ -9,10 +9,9 @@ fun main(args: Array<String>) {
     val car2 = Car("Aston Martin", "red", "159r")
     val car3 = Car("Audi", "green", "458t")
 
-    println(car1.toString())
-    println(car2.toString())
-    println(car3.toString())
-
+    println(car1)
+    println(car2)
+    println(car3)
 }
 
-data class Car(val brand: String, var color: String, var number: String)
+data class Car(val brand: String, val color: String, val number: String)

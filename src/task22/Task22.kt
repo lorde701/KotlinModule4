@@ -7,8 +7,7 @@ package task22
 
 fun main(args: Array<String>) {
     val boeing1 = Boeing747(10.0, 12.0, 14)
-    val boeing2: Aircraft
-    boeing2 = Boeing747(100.0, 100.0, 200)
+    val boeing2: Aircraft = Boeing747(100.0, 100.0, 200)
 
     println("Первый:")
     boeing1.printInfo()
@@ -18,16 +17,21 @@ fun main(args: Array<String>) {
 
 class Boeing747(maximumRange: Double, tankCapacity: Double, override val passengerCapacity: Int)
     : Aircraft(maximumRange, tankCapacity), Passenger {
-    override fun printInfo() = println("""Максимальная дальность полета - $maximumRange
-        |Вместимость бака - $tankCapacity
-        |Вместимость пассажиров - $passengerCapacity"""
-            .trimMargin())
+    override fun printInfo() {
+        super.printInfo()
+        println("Вместимость пассажиров - $passengerCapacity")
+    }
 }
 
-abstract class Aircraft(var maximumRange: Double, var tankCapacity: Double) {
+abstract class Aircraft(protected val maximumRange: Double, protected val tankCapacity: Double) {
     protected val fuelConsumption
         get() = tankCapacity / maximumRange * 100
-    open fun printInfo() = println("Максимальная дальность полета - $maximumRange, вместимость бака - $tankCapacity")
+
+    open fun printInfo() {
+        println("""Максимальная дальность полета - $maximumRange
+        |Вместимость бака - $tankCapacity"""
+                .trimMargin())
+    }
 }
 
 interface Passenger {
